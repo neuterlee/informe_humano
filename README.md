@@ -74,7 +74,7 @@ This project is a web-based visualization tool designed to highlight the stories
    ```
 3. Access the tool in your browser:
    ```
-   http://<your-local-ip>:8015
+   http://<your-local-ip>:8010
    ```
    Replace `<your-local-ip>` with your computer's local IP address.
 
