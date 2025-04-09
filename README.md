@@ -70,7 +70,7 @@ This project is a web-based visualization tool designed to highlight the stories
    ```
 2. Start a local server:
    ```bash
-   python3 -m http.server 8015 --bind 0.0.0.0
+   python3 -m http.server 8010 --bind 0.0.0.0
    ```
 3. Access the tool in your browser:
    ```
@@ -115,7 +115,7 @@ This project is a web-based visualization tool designed to highlight the stories
 ### Random Case
 - Access a random case by visiting:
   ```
-  http://<your-local-ip>:8015
+  http://<your-local-ip>:8010
   ```
 
 ---
