@@ -115,7 +115,7 @@ This project is a web-based visualization tool designed to highlight the stories
 ### Random Case
 - Access a random case by visiting:
   ```
-  http://<your-local-ip>:8015
+  http://<your-local-ip>:8000
   ```
 
 ---
