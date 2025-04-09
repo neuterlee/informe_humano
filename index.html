@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Anónima</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="static-message-0" class="static-message">
+        Esta es una historia real. La historia de <strong id="sm0-nombre" style="color: #800020;"></strong>
+    </div>
+
+    <div id="content" class="typing-container" style="display: none;">
+        <span id="sentence" class="sentence"></span>
+        <span class="input-cursor"></span>
+    </div>
+
+    <div id="case-card" class="case-card hidden">
+        <h2 class="case-card-title">Ficha de Desaparición</h2>
+        <img id="case-image" src="" alt="Foto de la persona desaparecida">
+        <table>
+            <tr><td>ID búsqueda</td><td id="case-id"></td></tr>
+            <tr><td>Autorización</td><td id="case-auth"></td></tr>
+            <tr><td>Nombre</td><td id="case-nombre"></td></tr>
+            <tr><td>Edad</td><td id="case-edad"></td></tr>
+            <tr><td>Sexo</td><td id="case-sexo"></td></tr>
+            <tr><td>Género</td><td id="case-genero"></td></tr>
+            <tr><td>Complexión</td><td id="case-complexion"></td></tr>
+            <tr><td>Estatura</td><td id="case-estatura"></td></tr>
+            <tr><td>Tez</td><td id="case-tez"></td></tr>
+            <tr><td>Cabello</td><td id="case-cabello"></td></tr>
+            <tr><td>Ojos</td><td id="case-ojos"></td></tr>
+            <tr><td>Municipio</td><td id="case-municipio"></td></tr>
+            <tr><td>Estado</td><td id="case-estado"></td></tr>
+            <tr><td>Fecha desaparición</td><td id="case-fecha"></td></tr>
+            <tr><td>Estatus</td><td id="case-estatus"></td></tr>
+        </table>
+    </div>
+
+    <div id="case-image-container" class="section">
+        <img id="case-image-display" src="" alt="Imagen del caso" />
+    </div>
+
+    <div id="days-missing-message" class="days-missing-message hidden">
+        <p><strong id="dmm-nombre"></strong> ha estado <span id="dmm-genero-suffix">desaparecido</span> por <strong><span id="days-missing"></span></strong> días.</p>
+    </div>
+
+     <div id="static-message-1" class="static-message">
+        Una historia asi se crea cada 48 horas en Jalisco. ¿Que estamos haciendo para cambiar esto?
+    </div>
+
+    <div id="static-message-2" class="static-message">
+        <!-- <p>El cambio comienza con nosotros. Actuemos ahora.</p> -->
+        <p>Comparte esta historia en tus redes sociales:</p>
+        <div class="share-buttons">
+            <a id="share-facebook" href="#" target="_blank" class="share-button facebook" aria-label="Compartir en Facebook">
+                <img src="static/icons/facebook_icon.png" alt="Facebook" class="social-icon">
+            </a>
+            <a id="share-twitter" href="#" target="_blank" class="share-button twitter" aria-label="Compartir en Twitter">
+                <img src="static/icons/x_icon.png" alt="Twitter" class="social-icon">
+            </a>
+            <a id="share-whatsapp" href="#" target="_blank" class="share-button whatsapp" aria-label="Compartir en WhatsApp">
+                <img src="static/icons/whatsapp_icon.png" alt="WhatsApp" class="social-icon">
+            </a>
+            <a id="share-instagram" href="#" target="_blank" class="share-button instagram" aria-label="Compartir en Instagram">
+                <img src="static/icons/instagram_icon.png" alt="Instagram" class="social-icon">
+            </a>
+        </div>
+        <p style="font-size: small; margin-top: 40px;">Muestra otro caso:</p>
+        <button id="regenerate-story" class="regenerate-button" aria-label="Mostrar otro caso">
+            <img src="static/icons/refresh_icon.png" alt="Mostrar otro caso" class="regenerate-icon">
+        </button>
+    </div>
+
+    <div id="navigation-instructions" class="navigation-instructions visible">
+        <p>Presiona ← o → para navegar entre secciones.</p>
+    </div>
+    <div id="navigation-ready-message" class="navigation-ready-message hidden">
+        <p>La navegación está lista. Usa las flechas del teclado o desliza con tu dedo para moverte entre secciones.</p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
