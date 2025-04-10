@@ -456,16 +456,16 @@ body {
     }
 
     .social-icon {
-        width: 3rem;
+        width: 2.7rem;
         height: auto;
     }
     
     .regenerate-button {
-        margin: 0px;
+        margin: 5px;
     }
 
     .regenerate-icon {
-        width: 3rem;
+        width: 2.5rem;
         height: auto;
     }
 
