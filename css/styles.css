@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(8, 8, 8);
+    background-color: #0b090a;
     color: white;
     font-family: 'Funnel Sans', sans-serif;
     font-size: 12px;
@@ -13,6 +13,26 @@ body {
     overflow: hidden;
 }
 
+/* --- Section - Story of the Missing Person --- */
+
+#sm0-nombre {
+    color: #d62828;
+}
+#storyOF {
+    animation: opacityChange 8s 0s forwards alternate;
+}
+@keyframes opacityChange {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 /* --- Section - Typing --- */
 
 .typing-container {
@@ -21,8 +41,8 @@ body {
     align-items: center;
     flex-direction: column;
     width: auto; /* Restrict the width of the container */
-    max-width: 80%; /* Ensure it fits smaller screens */
-    padding: 40px;
+    max-width: 30vw; /* Ensure it fits smaller screens */
+    padding: 40px 30px;
     border: 2px solid black; /* Optional: Add a border for the box */
     border-radius: 30px; /* Optional: Add rounded corners */
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.11); /* Optional: Add a glow effect */
@@ -33,7 +53,6 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    text-align: left;
 }
 
 .sentence {
@@ -74,7 +93,6 @@ body {
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
- /* Added class from JS to handle initial hidden state */
 .case-card.hidden {
     display: none;
 }
@@ -166,11 +184,11 @@ body {
 
 /* Specific transition from original file for static-message */
 /* You might want to make these consistent (e.g., all 2s) */
-/* Transition duration  */
+
+/* Transition duration MATCHING in JS  */
 
 .static-message, .days-missing-message, .content, .case-card, #case-image-container, .typing-container {
     transition: opacity 2s ease-in-out; 
-    
 }
 
  /* Added class from JS to handle visibility */
@@ -227,7 +245,17 @@ body {
     z-index: 1000;
     animation: shadowAnimation 15s infinite alternate;
 }
-
+@keyframes shadowAnimation {
+    0% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+    50% {
+        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.2); /* Baja intensidad */
+    }
+    100% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+}
 .navigation-ready-message.visible {
     opacity: 1;
     visibility: visible;
@@ -258,17 +286,7 @@ body {
     border-radius: 10px; /* Opcional: bordes redondeados */
     /* animation: shadowAnimation 6s infinite alternate; Animación continua */
 }
-@keyframes shadowAnimation {
-    0% {
-        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
-    }
-    50% {
-        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.3); /* Baja intensidad */
-    }
-    100% {
-        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
-    }
-}
+
 .regenerate-button {
     display: inline-flex;
     justify-content: center;
@@ -323,7 +341,11 @@ body {
     /* Adjust typing/message font size */
 
     .typing-container, .sentence, .static-message, .days-missing-message {
-        font-size: 1rem;
+        font-size: 1.1rem;
+    }
+    .typing-container {
+        min-width: 50vw; /* Restrict the width of the container */
+        max-width: 80vw; /* Ensure it fits smaller screens */
     }
     .input-cursor {
         height: 18px;
