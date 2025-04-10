@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia Anónima</title>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     </noscript>
@@ -12,12 +14,11 @@
 </head>
 <body>
     <div id="static-message-0" class="static-message">
-        Esta es una historia real. La historia de <strong id="sm0-nombre" style="color: #800020;"></strong>
+        Esta es una historia real. La historia de <strong id="sm0-nombre" >asd</strong>
     </div>
 
     <div id="content" class="typing-container" style="display: none;">
-        <span id="sentence" class="sentence"></span>
-        <span class="input-cursor"></span>
+        <span><span id="sentence" class="sentence"></span><span class="input-cursor"></span></span>
     </div>
 
     <div id="case-card" class="case-card hidden">
@@ -77,11 +78,9 @@
         </button>
     </div>
 
-    <div id="navigation-instructions" class="navigation-instructions visible">
-        <p>Presiona ← o → para navegar entre secciones.</p>
-    </div>
     <div id="navigation-ready-message" class="navigation-ready-message hidden">
         <p>La navegación está lista. Usa las flechas del teclado o desliza con tu dedo para moverte entre secciones.</p>
+        <p>Presiona ← o → para navegar entre secciones.</p>
     </div>
 
     <script src="js/main.js"></script>

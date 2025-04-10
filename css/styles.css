@@ -1,7 +1,8 @@
 body {
-    background-color: black;
+    background-color: rgb(8, 8, 8);
     color: white;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Funnel Sans', sans-serif;
+    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,36 +12,57 @@ body {
     /* Added to prevent scrollbars during transitions, review if needed */
     overflow: hidden;
 }
+
+/* --- Section - Typing --- */
+
 .typing-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 500px; /* Restrict the width of the container */
+    width: auto; /* Restrict the width of the container */
     max-width: 80%; /* Ensure it fits smaller screens */
-    padding: 20px;
+    padding: 40px;
     border: 2px solid black; /* Optional: Add a border for the box */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.274); /* Optional: Add a glow effect */
-    font-size: 22px; /* Adjust the font size as needed */
+    border-radius: 30px; /* Optional: Add rounded corners */
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.11); /* Optional: Add a glow effect */
+    font-size: 1.3rem; /* Adjust the font size as needed */
     opacity: 1;
-    transition: opacity 1.5s ease-in-out; /* Smooth fade-in and fade-out */
     /* Ensure it's positioned correctly if overlapping */
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    text-align: left;
 }
+
+.sentence {
+    white-space: pre-wrap; /* Preserve line breaks */
+    word-wrap: break-word; /* Ensure long words break properly */
+}
+
+.input-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 18px; /* Match typing container font size */
+    background-color: white;
+    margin: 0 0 -2px 5px; /* Adjust cursor position */
+    animation: blink 0.6s linear infinite alternate;
+}
+
+/* --- Section - Ficha de Desaparición --- */
+
 .case-card {
     /* display: none; -> Controlled by JS now */
     display: flex; /* Use flex for layout */
     opacity: 0;
-    transition: opacity 2s ease;
+
+    /* transition: opacity 2s ease ; */
     font-family: 'Funnel Sans', sans-serif; /* Apply Funnel Sans font */
     flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    gap: 15px; /* Add spacing between elements */
+    gap: 50px; /* Add spacing between elements */
     max-width: 80%; /* Ensure it fits smaller screens */
-    align-items: flex-start; /* Align items at the top */
+    align-items: center; /* Align items at the top */
     justify-content: center; /* Center content horizontally */
     /* Ensure it's positioned correctly for transitions */
     position: absolute;
@@ -51,50 +73,10 @@ body {
     width: 80%;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
+
  /* Added class from JS to handle initial hidden state */
 .case-card.hidden {
     display: none;
-}
-
-.case-card img {
-    flex: 1 1 300px; /* Allow the image to take up proportional space */
-    max-width: 40%; /* Ensure the image fits within its container */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 400px; /* Increase the height for better visibility on PC */
-    object-fit: scale-down; /* Scale down the image if it's too large */
-    margin: 0 10px; /* Add some margin around the image */
-    clip-path: inset(0 round 12px); /* Apply rounded corners */
-    align-self: center; /* Vertically align the image to the center */
-    transition: max-height 0.3s ease;    /* Smooth transition for height change */
-}
- /* Media query was inside the img rule, moved outside */
-@media (max-width: 768px) {
-    .case-card img {
-        max-height: 200px; /* Reduce the height for smaller screens */
-        /* max-width: 40%; /* This was redundant */
-    }
-    /* Adjust table font size on smaller screens if needed */
-     .case-card table {
-         font-size: 12px;
-    }
-     .case-card table td {
-        padding: 1px 3px;
-    }
-     .case-card table td:first-child,
-     .case-card table td:last-child {
-         padding: 3px;
-     }
-    /* Adjust title size */
-     .case-card-title {
-         font-size: 20px;
-     }
-     /* Adjust typing/message font size */
-    .typing-container, .sentence, .static-message, .days-missing-message {
-         font-size: 18px;
-     }
-     .input-cursor {
-         height: 18px;
-     }
 }
 
 .case-card-title {
@@ -102,75 +84,69 @@ body {
     font-weight: bold;
     text-align: center;
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     margin-top: 0px;
     color: white;
-    font-family: 'Funnel Sans', sans-serif; /* Apply Funnel Sans font */
     position: relative; /* Keep if needed for layering/pseudo-elements */
-    background-color: black; /* Match the background color */
      /* Ensure title is part of the flex layout */
     flex-basis: 100%; /* Make title take full width */
     order: -1; /* Ensure title appears first */
 }
 
+.case-card img {
+    max-width: 80%;
+    max-height: 350px; /* Increase the height for better visibility on PC */
+    min-height: 400px; /* Set a minimum height */
+    object-fit: cover; /* Scale down the image if it's too large */
+    clip-path: inset(0 round 5px); /* Apply rounded corners */
+    align-self: center; /* Vertically align the image to the center */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* transition: max-height 0.3s ease;    Smooth transition for height change */
+}
+
 .case-card table {
     flex: 2 1 300px; /* Allow the table to take up more space proportionally */
-    /* width: 100%; /* width is implicit in flex item */
+    max-width: 600px; /* Set a max width for the table */
     border-collapse: collapse;
-    max-width: 400px; /* Set a max width for the table */
-    font-size: 14px;
-    border-radius: 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.082);
 }
+
 .case-card table td {
     padding: 2px 4px; /* Reduce padding for compactness */
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 3px solid rgba(0, 0, 0, 0);
     text-align: left;
     vertical-align: middle; /* Align content to the middle */
     color: #afafaf;
     background-color: rgba(255, 255, 255, 0.05);
-    transition: background-color 0.3s ease;
+    /* transition: background-color 0.3s ease; */
 }
-
 
 .case-card table td:first-child {
     font-weight: bold;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 5px;
+    padding: 6px 0 6px 10px;
     width: 35%;
     color: #9b9b9b;
 }
 
 .case-card table td:last-child {
     word-wrap: break-word;
-    padding: 5px;
+    padding: 6px 0 6px 10px;
     background-color: rgba(255, 255, 255, 0.05);
     color: #afafaf;
 }
 
-
-.sentence {
-    /* font-size: 24px; -> Inherited from .typing-container now */
-    white-space: pre-wrap; /* Preserve line breaks */
-    word-wrap: break-word; /* Ensure long words break properly */
-}
-.input-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 24px; /* Match typing container font size */
-    background-color: white;
-    margin-left: 5px;
-    animation: blink 0.6s linear infinite alternate;
-}
 @keyframes blink {
     0%, 40% { opacity: 1; }
     60%, 100% { opacity: 0; }
 }
 
 /* Common styles for message blocks */
+
 .static-message, .days-missing-message {
      display: none; /* Hidden by default, controlled by JS */
      width: 700px; /* Restrict the width of the container */
@@ -179,7 +155,6 @@ body {
      font-size: 30px; /* Base font size */
      margin-top: 0; /* Remove top margin if positioned absolutely */
      opacity: 0;
-     transition: opacity 2s ease; /* Consistent transition */
      font-family: 'Funnel Sans', sans-serif; /* Apply Funnel Sans font */
      /* Positioning for overlap */
      position: absolute;
@@ -188,43 +163,23 @@ body {
      transform: translate(-50%, -50%);
      box-sizing: border-box;
 }
+
 /* Specific transition from original file for static-message */
 /* You might want to make these consistent (e.g., all 2s) */
- .static-message {
-    transition: opacity 3s ease-in-out;
- }
+/* Transition duration  */
 
-/* Added class from JS to handle visibility */
-.static-message.visible, .days-missing-message.visible {
+.static-message, .days-missing-message, .content, .case-card, #case-image-container, .typing-container {
+    transition: opacity 2s ease-in-out; 
+    
+}
+
+ /* Added class from JS to handle visibility */
+ .static-message.visible, .days-missing-message.visible {
     display: block; /* Or 'flex' if they need flex properties */
     opacity: 1;
 }
 
 /* --- Navigation --- */
-.navigation-instructions {
-    visibility: hidden; /* Use visibility to keep space */
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    opacity: 0;
-    /* transition: opacity 1s ease-in-out; -> Transition applied on visible class */
-     transition: opacity 1s ease-in-out, visibility 0s 1s; /* Delay visibility change */
-    z-index: 1000;
-}
-
-.navigation-instructions.visible {
-    opacity: 1;
-    visibility: visible; /* Make visible */
-     transition: opacity 1s ease-in-out, visibility 0s; /* Change visibility immediately */
-
-}
-
 .share-buttons {
     display: flex;
     justify-content: center;
@@ -258,25 +213,27 @@ body {
     bottom: 80px; /* Position above instructions */
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 15px;
+    font-size: 1rem;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
     opacity: 0;
     visibility: hidden;
     /* transition: opacity 0.5s ease, visibility 0.5s ease; -> Use delay for fade out */
-     transition: opacity 0.5s ease, visibility 0s 0.5s; /* Delay visibility change */
+    transition: opacity 0.5s ease, visibility 2s 2s; /* Delay visibility change */
     z-index: 1000;
+    animation: shadowAnimation 15s infinite alternate;
 }
 
 .navigation-ready-message.visible {
     opacity: 1;
     visibility: visible;
+
     /* Reset transition for fade-in */
-     transition: opacity 0.5s ease, visibility 0s;
+    transition: opacity 2s ease-in-out, visibility 0s;
 }
 
 #case-image-container {
@@ -285,7 +242,7 @@ body {
     align-items: center;
     height: 100vh; /* Ocupa toda la altura de la ventana */
     opacity: 0; /* Para transición */
-    transition: opacity 2s ease-in-out;
+    /* transition: opacity 2s ease-in-out; */
 }
 
 #case-image-container.visible {
@@ -294,12 +251,24 @@ body {
 }
 
 #case-image-display {
+    object-fit: contain; /* Scale down the image if it's too large */
+    min-height: 80vh;
     max-width: 80%;
-    max-height: 80%;
+    max-height: 80vh; /* Limitar la altura máxima */
     border-radius: 10px; /* Opcional: bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+    /* animation: shadowAnimation 6s infinite alternate; Animación continua */
 }
-
+@keyframes shadowAnimation {
+    0% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+    50% {
+        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.3); /* Baja intensidad */
+    }
+    100% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+}
 .regenerate-button {
     display: inline-flex;
     justify-content: center;
@@ -318,4 +287,52 @@ body {
 .regenerate-icon {
     width: 32px;
     height: 32px;
+}
+
+ /* Media query was inside the img rule, moved outside */
+ @media (max-width:1024px) {
+    /* Ficha Desaparición */
+    .case-card {
+        flex-direction: column; /* Stack elements vertically */
+        gap: 20px; /* Reduce gap for smaller screens */
+        max-width: 90%;
+    }
+
+    .case-card img {
+        max-height: 200px; /* Reduce the height for smaller screens */
+        min-height: 0; /* Set a minimum height */
+        object-fit: scale-down;
+    }
+
+     .case-card table {
+         font-size: 1.1rem;
+    }
+
+     .case-card table td {
+        padding: 3px 3px;
+    }
+
+    .case-card table td:first-child, .case-card table td:last-child {
+        padding: 3px;
+    }
+    
+    .case-card-title {
+        font-size: 2rem;
+    }
+
+    /* Adjust typing/message font size */
+
+    .typing-container, .sentence, .static-message, .days-missing-message {
+        font-size: 1rem;
+    }
+    .input-cursor {
+        height: 18px;
+    }
+
+    /* Navigation */
+    .navigation-ready-message {
+        bottom: 20px; /* Position above instructions */
+        font-size: 1rem;
+        width: 80%;
+    }
 }

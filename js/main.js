@@ -2,12 +2,12 @@ console.log("Page loaded. Starting JS execution...");
 
 // --- Element References ---
 const sentenceElement = document.getElementById('sentence');
-const contentElement = document.getElementById('content');
-const daysMissingElement = document.getElementById('days-missing-message');
-const caseCardElement = document.getElementById('case-card');
-const staticMessage0Element = document.getElementById('static-message-0');
-const staticMessage1Element = document.getElementById('static-message-1');
-const staticMessage2Element = document.getElementById('static-message-2');
+const section_1_HistoryOf = document.getElementById('static-message-0');
+const section_3_TypingCont = document.getElementById('content');
+const section_5_DaysMissing = document.getElementById('days-missing-message');
+const section_4_CaseCard = document.getElementById('case-card');
+const section_6_MessageOne = document.getElementById('static-message-1');
+const section_7_MessageTwo = document.getElementById('static-message-2');
 const navigationInstructions = document.getElementById('navigation-instructions');
 const navigationReadyMessage = document.getElementById('navigation-ready-message');
 const cursorElement = document.querySelector('.input-cursor'); // Mover aquí para acceso global
@@ -15,7 +15,7 @@ const cursorElement = document.querySelector('.input-cursor'); // Mover aquí pa
 // Placeholders for dynamic data
 const sm0NombreElement = document.getElementById('sm0-nombre');
 const caseImageElement = document.getElementById('case-image');
-const caseImageContainer = document.getElementById('case-image-container');
+const section_2_ImgContainer = document.getElementById('case-image-container');
 const caseImageDisplay = document.getElementById('case-image-display');
 const caseIdElement = document.getElementById('case-id');
 const caseAuthElement = document.getElementById('case-auth');
@@ -48,7 +48,8 @@ let typingIndex = 0;    // Index for the typing animation
 let textToType = "";    // Narrative text to be typed
 
 // Switch to control navigation availability
-const enableNavigationFromStart = true; // Set to true for testing, false for production
+const enableNavigationFromStart = false; // Set to true for testing, false for production
+let enableNavigation = false; // Control variable for navigation
 
 // --- Helper Functions ---
 
@@ -105,12 +106,12 @@ function parseCSV(csvText) {
     return data;
 }
 
-
 /**
  * Calculates the number of days between a date string and now.
  * @param {string} fechaDesaparicion - Date string in 'YYYY-MM-DD' format.
  * @returns {number|null} - Number of days or null if date is invalid.
  */
+
 function calculateDaysMissing(fechaDesaparicion) {
     try {
         // Ensure correct parsing (handle potential timezone issues if necessary)
@@ -257,14 +258,15 @@ function generateShareLinks(caseId) {
 // --- Animation and Sequencing Logic (Adapted from original script) ---
 
 let currentSectionIndex = 0; // Start with the first visual element in the sequence
+
 const sections = [
-    staticMessage0Element,
-    caseImageContainer,   // Nuevo contenedor de la imagen
-    contentElement,       // Typing container
-    caseCardElement,      // Case card
-    daysMissingElement,   // Days missing message
-    staticMessage1Element,
-    staticMessage2Element
+    section_1_HistoryOf,
+    section_2_ImgContainer,   // Nuevo contenedor de la imagen
+    section_3_TypingCont,       // Typing container
+    section_4_CaseCard,      // Case card
+    section_5_DaysMissing,   // Days missing message
+    section_6_MessageOne,
+    section_7_MessageTwo
 ];
 
 /**
@@ -276,21 +278,26 @@ function showSection(index) {
         if (!section) return; // Skip if element doesn't exist
         if (i === index) {
              // Use 'flex' for elements that need it, 'block' otherwise
-            section.style.display = (section === contentElement || section === caseCardElement || section === caseImageContainer) ? 'flex' : 'block';
+             setTimeout(() => {
+                section.style.display = (section === section_3_TypingCont || section === section_4_CaseCard || section === section_2_ImgContainer) ? 'flex' : 'block';
+                // Force reflow before adding class to ensure transition runs
+                void section.offsetWidth;
+                section.classList.add('visible');
+                section.style.opacity = 1; // Ensure opacity is set
+             }, 2000); // Match transition duration start
+        } else {
             // Force reflow before adding class to ensure transition runs
             void section.offsetWidth;
-            section.classList.add('visible');
-            section.style.opacity = 1; // Ensure opacity is set
-        } else {
             section.classList.remove('visible');
             section.style.opacity = 0;
-             // Use setTimeout to hide after fade-out transition completes (e.g., 2s)
+
+            // Use setTimeout to hide after fade-out transition completes Match with CSS
             setTimeout(() => {
                 // Only hide if it's still not the current section
                  if (sections.indexOf(section) !== currentSectionIndex) {
                     section.style.display = 'none';
                  }
-             }, 2000); // Match transition duration
+             }, 2000); // Match transition duration in CSS
         }
     });
     currentSectionIndex = index; // Update the global index
@@ -305,24 +312,25 @@ async function runDisplaySequence() {
     console.log("Starting display sequence...");
     typingIndex = 0; // Reset typing index
     sentenceElement.innerHTML = ''; // Clear previous sentence
+    navigationReadyMessage.classList.remove('visible');
 
     // 1. Show Static Message 0
-    showSection(0); // Show sm0
-    await waitForMs(4000); // Display for 4s
+    showSection(0); // Show Message 0
+    await waitForMs(6000); // Display for
 
     // 2. Show Case Image
     showSection(1); // Show case image
-    await waitForMs(4000); // Display for 4s
+    await waitForMs(6000); // Display for
 
     // 3. Transition to Typing Container
     showSection(2); // Show typing container
-    await waitForMs(1500); // Wait for fade-in
+    await waitForMs(3000); // Wait for fade-in
     await typeSentence(); // Start typing effect
 
     // 4. Transition to Case Card after typing
     await waitForMs(2000); // Pause after typing
     showSection(3); // Show case card
-    await waitForMs(5000); // Display card for 5s
+    await waitForMs(12000); // Display card for 12s
 
     // 5. Transition to Days Missing Message
     showSection(4); // Show days missing
@@ -334,10 +342,11 @@ async function runDisplaySequence() {
 
     // 7. Transition to Static Message 2 (Share)
     showSection(6); // Show sm2 (final state)
-    await waitForMs(1000); // Short wait after sm2 appears
+    await waitForMs(3000); // Short wait after sm2 appears
 
     // 8. Enable Navigation
-    startNavigation();
+    enableNavigation = true; // Reactiva la navegación
+    navigationEnabled();
     console.log("Display sequence finished. Navigation enabled.");
 }
 
@@ -365,7 +374,7 @@ async function typeSentence() {
         typingIndex++;
         await waitForMs(60); // Typing speed
     }
-    cursorElement.style.display = 'none'; // Hide cursor when done
+    // cursorElement.style.display = 'none'; // Hide cursor when done
     console.log("Typing effect finished.");
 }
 
@@ -375,20 +384,21 @@ async function typeSentence() {
  * Enables keyboard navigation between sections.
  */
 function enableKeyboardNavigation() {
-    document.addEventListener('keydown', (event) => {
-        let newIndex = currentSectionIndex;
-        if (event.key === 'ArrowLeft') {
-            newIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
-        } else if (event.key === 'ArrowRight') {
-            newIndex = (currentSectionIndex + 1) % sections.length;
-        }
-
-        if (newIndex !== currentSectionIndex) {
-            console.log(`Navigating to section ${newIndex}`);
-            showSection(newIndex);
-        }
-    });
-    console.log("Keyboard navigation enabled.");
+    if (enableNavigation) {
+        document.addEventListener('keydown', (event) => {
+            let newIndex = currentSectionIndex;
+            if (event.key === 'ArrowLeft') {
+                newIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+            } else if (event.key === 'ArrowRight') {
+                newIndex = (currentSectionIndex + 1) % sections.length;
+            }
+    
+            if (newIndex !== currentSectionIndex) {
+                console.log(`Navigating to section ${newIndex}`);
+                showSection(newIndex);
+            }
+        });
+    }
 }
 
 function enableTouchNavigation() {
@@ -425,31 +435,34 @@ function showNavigationReadyMessageFunc() {
     if (navigationReadyMessage) {
         navigationReadyMessage.classList.add('visible');
         // Hide the message after 5 seconds
-        setTimeout(() => {
-            navigationReadyMessage.classList.remove('visible');
-        }, 5000);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                navigationReadyMessage.classList.remove('visible');
+            }
+        }),
         console.log("Navigation ready message shown.");
     } else {
         console.error("Element 'navigation-ready-message' not found.");
     }
 }
 
-/**
- * Starts navigation based on the control variable.
- */
-function startNavigation() {
-    if (enableNavigationFromStart) {
-        console.log("Navigation enabled from the start (testing mode).");
-        enableKeyboardNavigation();
-        enableTouchNavigation();
-    } else {
-        if (navigationInstructions) {
-            navigationInstructions.classList.add('visible'); // Show instructions permanently once nav is ready
-        }
-        enableKeyboardNavigation();
-        enableTouchNavigation();
-        showNavigationReadyMessageFunc(); // Show the temporary "ready" message
-    }
+/* Starts navigation based on the control variable. */
+// function startNavigation() {
+//     if (enableNavigationFromStart) {
+//         console.log("Navigation enabled from the start (testing mode).");
+//         enableKeyboardNavigation();
+//         enableTouchNavigation();
+//     } else {
+//         enableKeyboardNavigation();
+//         enableTouchNavigation();
+//         showNavigationReadyMessageFunc(); // Show the temporary "ready" message
+//     }
+// }
+
+function navigationEnabled() {
+    enableKeyboardNavigation();
+    // enableTouchNavigation();
+    showNavigationReadyMessageFunc(); // Show the temporary "ready" message
 }
 
 /**
@@ -457,46 +470,49 @@ function startNavigation() {
  */
 function regenerateStory() {
     fetch('data/processed_cases.csv')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(csvText => {
-            const cases = parseCSV(csvText);
-            if (cases.length > 0) {
-                // Seleccionar un caso aleatorio
-                currentCase = cases[Math.floor(Math.random() * cases.length)];
-
-                console.log("New random case selected:", currentCase);
-
-                // Actualizar la URL con el ID del nuevo caso
-                updateUrlWithCaseId(currentCase.id_cedula_busqueda);
-
-                // Actualizar el DOM con los datos del nuevo caso
-                populateCaseData(currentCase);
-                generateShareLinks(currentCase.id_cedula_busqueda);
-
-                // Reiniciar la secuencia visual si es necesario
-                runDisplaySequence();
-            } else {
-                console.error("No cases found or parsed from CSV.");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching or processing CSV:", error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(csvText => {
+        const cases = parseCSV(csvText);
+        if (cases.length > 0) {
+            // Seleccionar un caso aleatorio
+            currentCase = cases[Math.floor(Math.random() * cases.length)];
+            
+            console.log("New random case selected:", currentCase);
+            
+            // Actualizar la URL con el ID del nuevo caso
+            updateUrlWithCaseId(currentCase.id_cedula_busqueda);
+            
+            // Actualizar el DOM con los datos del nuevo caso
+            populateCaseData(currentCase);
+            generateShareLinks(currentCase.id_cedula_busqueda);
+            
+            // Reiniciar la secuencia visual si es necesario
+            runDisplaySequence();
+        } else {
+            console.error("No cases found or parsed from CSV.");
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching or processing CSV:", error);
+    });
 }
 
 // Agregar evento al botón de regenerar historia
-document.getElementById('regenerate-story').addEventListener('click', regenerateStory);
+document.getElementById('regenerate-story').addEventListener('click', function() {
+    enableNavigation = false; // Desactiva la navegación dentro de la función
+    regenerateStory(); // Ejecuta la función regenerateStory
+});
 
 // --- Main Execution ---
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded and parsed.");
-
+    
     const queryParams = getQueryParams();
     const caseId = queryParams.id; // Obtener el identificador de la URL
 
@@ -535,10 +551,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 populateCaseData(currentCase);
                 generateShareLinks(currentCase.id_cedula_busqueda);
 
-                // Habilitar navegación desde el principio si está activada
-                if (enableNavigationFromStart) {
-                    startNavigation();
-                }
+                // // Habilitar navegación desde el principio si está activada
+                // if (enableNavigationFromStart) {
+                //     startNavigation();
+                // }
 
                 // Iniciar la secuencia visual
                 runDisplaySequence();
