@@ -281,7 +281,7 @@ function showSection(index) {
         if (i === index) {
              // Use 'flex' for elements that need it, 'block' otherwise
              setTimeout(() => {
-                section.style.display = (section === section_3_TypingCont || section === section_4_CaseCard || section === section_2_ImgContainer) ? 'flex' : 'block';
+                section.style.display = (section === section_2_ImgContainer || section === section_3_TypingCont || section === section_4_CaseCard ) ? 'flex' : 'block';
                 // Force reflow before adding class to ensure transition runs
                 void section.offsetWidth;
                 section.classList.add('visible');
@@ -322,7 +322,7 @@ async function runDisplaySequence() {
 
     // 2. Show Case Image
     showSection(1); // Show case image
-    await waitForMs(6000); // Display for
+    await waitForMs(12000); // Display for
 
     // 3. Transition to Typing Container
     showSection(2); // Show typing container
@@ -334,7 +334,7 @@ async function runDisplaySequence() {
     showSection(3); // Show case card
     await waitForMs(12000); // Display card for 12s
 
-    // 5. Transition to Days Missing Message
+    // // 5. Transition to Days Missing Message
     showSection(4); // Show days missing
     await waitForMs(5000); // Display for 5s
 
@@ -391,15 +391,19 @@ function enableKeyboardNavigation() {
             let newIndex = currentSectionIndex;
             if (event.key === 'ArrowLeft') {
                 newIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+                console.log(`Navigating to section ${newIndex}`);
             } else if (event.key === 'ArrowRight') {
                 newIndex = (currentSectionIndex + 1) % sections.length;
+                console.log(`Navigating to section ${newIndex}`);
             }
-    
             if (newIndex !== currentSectionIndex) {
                 console.log(`Navigating to section ${newIndex}`);
                 showSection(newIndex);
             }
         });
+    }
+    else {
+        document.removeEventListener('keydown', enableNavigation = false);
     }
 }
 
