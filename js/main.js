@@ -11,6 +11,8 @@ const section_7_MessageTwo = document.getElementById('static-message-2');
 const navigationInstructions = document.getElementById('navigation-instructions');
 const navigationReadyMessage = document.getElementById('navigation-ready-message');
 const cursorElement = document.querySelector('.input-cursor'); // Mover aquí para acceso global
+const navReadyDesktop = document.getElementById('nav-ready-desktop');
+const navReadyMobile = document.getElementById('nav-ready-mobile');
 
 // Placeholders for dynamic data
 const sm0NombreElement = document.getElementById('sm0-nombre');
@@ -110,7 +112,7 @@ function parseCSV(csvText) {
  * Calculates the number of days between a date string and now.
  * @param {string} fechaDesaparicion - Date string in 'YYYY-MM-DD' format.
  * @returns {number|null} - Number of days or null if date is invalid.
- */
+*/
 
 function calculateDaysMissing(fechaDesaparicion) {
     try {
@@ -435,6 +437,12 @@ function showNavigationReadyMessageFunc() {
     if (navigationReadyMessage) {
         navigationReadyMessage.classList.add('visible');
         // Hide the message after 5 seconds
+        if (screen.width < 926) {
+            setTimeout(() => {
+                navigationReadyMessage.classList.remove('visible');
+            }
+            , 10000); // Adjust the time as needed
+        }
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
                 navigationReadyMessage.classList.remove('visible');
@@ -461,13 +469,12 @@ function showNavigationReadyMessageFunc() {
 
 function navigationEnabled() {
     enableKeyboardNavigation();
-    // enableTouchNavigation();
+    enableTouchNavigation();
     showNavigationReadyMessageFunc(); // Show the temporary "ready" message
 }
 
-/**
- * Regenerates a new random story and updates the DOM.
- */
+/* Regenerates a new random story and updates the DOM. */
+
 function regenerateStory() {
     fetch('data/processed_cases.csv')
     .then(response => {

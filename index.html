@@ -57,7 +57,7 @@
 
     <div id="static-message-2" class="static-message">
         <!-- <p>El cambio comienza con nosotros. Actuemos ahora.</p> -->
-        <p>Comparte esta historia en tus redes sociales:</p>
+        <p class="shareStory">Comparte esta historia en tus redes sociales:</p>
         <div class="share-buttons">
             <a id="share-facebook" href="#" target="_blank" class="share-button facebook" aria-label="Compartir en Facebook">
                 <img src="static/icons/facebook_icon.png" alt="Facebook" class="social-icon">
@@ -79,8 +79,17 @@
     </div>
 
     <div id="navigation-ready-message" class="navigation-ready-message hidden">
-        <p>La navegación está lista. Usa las flechas del teclado o desliza con tu dedo para moverte entre secciones.</p>
-        <p>Presiona ← o → para navegar entre secciones.</p>
+        <div id="nav-ready-desktop">
+            <!-- <p>La navegación está lista. Usa las flechas del teclado</p> -->
+            <p>Presiona <img src="static/icons/arrowLeft.svg" alt="arrowLeft" class="arrowSVG">  o  <img src="static/icons/arrowRight.svg" alt="arrowRight" class="arrowSVG"> para navegar entre secciones.</p>
+        </div>
+        <div id="nav-ready-mobile">
+            <div>
+                <div class="swipeBar" class="swipeDiv"></div>
+                <img class="swipeHand" src="static\icons\handSwipe.svg" alt="handSwipe" class="swipeDiv">
+            </div>
+            <p>Desliza a la izquierda o derecha para navegar entre secciones.</p>
+        </div>
     </div>
 
     <script src="js/main.js"></script>

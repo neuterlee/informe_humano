@@ -33,6 +33,31 @@ body {
     }
 }
 
+/* --- Section 2 - Case Image --- */
+
+#case-image-container {
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    opacity: 0; /* Para transición */
+    /* transition: opacity 2s ease-in-out; */
+}
+
+#case-image-container.visible {
+    display: flex; /* Mostrar como flexbox */
+    opacity: 1; /* Hacer visible */
+}
+
+#case-image-display {
+    object-fit: contain;
+    min-height: 80vh;
+    max-width: 80%;
+    max-height: 80vh; /* Limitar la altura máxima */
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    /* animation: shadowAnimation 6s infinite alternate; Animación continua */
+}
+
 /* --- Section - Typing --- */
 
 .typing-container {
@@ -43,7 +68,7 @@ body {
     width: auto; /* Restrict the width of the container */
     max-width: 30vw; /* Ensure it fits smaller screens */
     padding: 40px 30px;
-    border: 2px solid black; /* Optional: Add a border for the box */
+    border: 2px solid rgba(0, 0, 0, 0); /* Optional: Add a border for the box */
     border-radius: 30px; /* Optional: Add rounded corners */
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.11); /* Optional: Add a glow effect */
     font-size: 1.3rem; /* Adjust the font size as needed */
@@ -53,6 +78,20 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+
+    animation: shadowAnimationType 6s infinite alternate;
+}
+
+@keyframes shadowAnimationType {
+    0% {
+        box-shadow: 0px 0px 40px rgba(92, 92, 92, 0.1); /* Baja intensidad */
+    }
+    50% {
+        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.2); /* Baja intensidad */
+    }
+    100% {
+        box-shadow: 0px 0px 40px rgba(92, 92, 92, 0.1); /* Baja intensidad */
+    }
 }
 
 .sentence {
@@ -170,7 +209,7 @@ body {
      width: 700px; /* Restrict the width of the container */
      max-width: 80%; /* Ensure it fits smaller screens */
      padding: 20px;
-     font-size: 30px; /* Base font size */
+     font-size: 1.5rem; /* Base font size */
      margin-top: 0; /* Remove top margin if positioned absolutely */
      opacity: 0;
      font-family: 'Funnel Sans', sans-serif; /* Apply Funnel Sans font */
@@ -197,7 +236,8 @@ body {
     opacity: 1;
 }
 
-/* --- Navigation --- */
+/* --- Section - Final Share --- */
+
 .share-buttons {
     display: flex;
     justify-content: center;
@@ -222,70 +262,11 @@ body {
 }
 
 .social-icon {
-    width: 24px; /* Adjust the size of the icons */
-    height: 24px;
+    width: 1.5rem; /* Adjust the size of the icons */
+    height: auto;
 }
 
-.navigation-ready-message {
-    position: fixed;
-    bottom: 80px; /* Position above instructions */
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    padding: 15px 20px;
-    border-radius: 15px;
-    font-size: 1rem;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
-    opacity: 0;
-    visibility: hidden;
-    /* transition: opacity 0.5s ease, visibility 0.5s ease; -> Use delay for fade out */
-    transition: opacity 0.5s ease, visibility 2s 2s; /* Delay visibility change */
-    z-index: 1000;
-    animation: shadowAnimation 15s infinite alternate;
-}
-@keyframes shadowAnimation {
-    0% {
-        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
-    }
-    50% {
-        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.2); /* Baja intensidad */
-    }
-    100% {
-        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
-    }
-}
-.navigation-ready-message.visible {
-    opacity: 1;
-    visibility: visible;
-
-    /* Reset transition for fade-in */
-    transition: opacity 2s ease-in-out, visibility 0s;
-}
-
-#case-image-container {
-    display: none; /* Oculto por defecto */
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ocupa toda la altura de la ventana */
-    opacity: 0; /* Para transición */
-    /* transition: opacity 2s ease-in-out; */
-}
-
-#case-image-container.visible {
-    display: flex; /* Mostrar como flexbox */
-    opacity: 1; /* Hacer visible */
-}
-
-#case-image-display {
-    object-fit: contain; /* Scale down the image if it's too large */
-    min-height: 80vh;
-    max-width: 80%;
-    max-height: 80vh; /* Limitar la altura máxima */
-    border-radius: 10px; /* Opcional: bordes redondeados */
-    /* animation: shadowAnimation 6s infinite alternate; Animación continua */
-}
+/* Regenerate Button */
 
 .regenerate-button {
     display: inline-flex;
@@ -307,9 +288,127 @@ body {
     height: 32px;
 }
 
+/* Navigation Ready Message */
+
+.navigation-ready-message {
+    font-weight: 300;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: fixed;
+    bottom: 80px; /* Position above instructions */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    /* transition: opacity 0.5s ease, visibility 0.5s ease; -> Use delay for fade out */
+    transition: opacity 0.5s ease, visibility 2s 2s; /* Delay visibility change */
+    z-index: 1000;
+    animation: shadowAnimation 15s infinite alternate;
+
+}
+
+@keyframes shadowAnimation {
+    0% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+    50% {
+        box-shadow: 0px 0px 60px rgba(92, 92, 92, 0.2); /* Baja intensidad */
+    }
+    100% {
+        box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.0); /* Baja intensidad */
+    }
+}
+
+.navigation-ready-message.visible {
+    opacity: 1;
+    visibility: visible;
+
+    /* Reset transition for fade-in */
+    transition: opacity 2s ease-in-out, visibility 0s;
+}
+
+#nav-ready-desktop{
+    display: block;
+    
+}
+
+#nav-ready-desktop > p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+#nav-ready-mobile{
+    display: none;
+}
+
+/* --- Arrows --- */
+.arrowSVG {
+    width: 1.2rem;
+    height: auto;
+}
+
+/* Swipe Animation Mobile */
+
+.swipeDiv {
+    position: absolute;
+    padding: 0;
+
+}
+
+.swipeBar {
+    margin: 10px auto -8px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 200px;
+    height: 10px;
+    border-radius: 100px;
+    background: linear-gradient(to right, #ffffff7a, #00000000);
+}
+
+.swipeHand {
+    width: 50px;
+    height: auto;
+    opacity: 0.8;
+    animation: swipeAnimation 7s infinite alternate;
+    z-index: 1000;
+}
+
+@keyframes swipeAnimation {
+    0% {
+        transform: translateX(70px) rotate(-20deg);
+    }
+    50% {
+        transform: translateX(-70px) rotate(-10deg);
+    }
+    90% {
+        transform: translateX(70px) rotate(-20deg);
+    }
+    100% {
+        transform: translateX(70px) rotate(-20deg);
+    }
+}
+
  /* Media query was inside the img rule, moved outside */
- @media (max-width:1024px) {
+ @media (max-width:926px) {
+    .static-message > .shareStory {
+        font-size: 1.3rem; 
+        margin-bottom: 40px;
+    }
+
     /* Ficha Desaparición */
+        
+    .case-card-title {
+        font-size: 1.5rem;
+        margin-bottom: 7px;
+    }
+
     .case-card {
         flex-direction: column; /* Stack elements vertically */
         gap: 20px; /* Reduce gap for smaller screens */
@@ -317,25 +416,24 @@ body {
     }
 
     .case-card img {
-        max-height: 200px; /* Reduce the height for smaller screens */
+        max-height: 150px; /* Reduce the height for smaller screens */
         min-height: 0; /* Set a minimum height */
         object-fit: scale-down;
     }
 
-     .case-card table {
-         font-size: 1.1rem;
+    .case-card table {
+         font-size: 0.8rem;
+         border-radius: 0;
+
     }
 
-     .case-card table td {
+    .case-card table td {
         padding: 3px 3px;
+        border: 0 solid rgba(0, 0, 0, 0);
     }
 
     .case-card table td:first-child, .case-card table td:last-child {
         padding: 3px;
-    }
-    
-    .case-card-title {
-        font-size: 2rem;
     }
 
     /* Adjust typing/message font size */
@@ -351,10 +449,43 @@ body {
         height: 18px;
     }
 
+    /* --- Section - Final Share --- */
+
+    .share-buttons {
+        gap: 10vw; /* Reduce gap for smaller screens */
+    }
+
+    .social-icon {
+        width: 3rem;
+        height: auto;
+    }
+    
+    .regenerate-button {
+        margin: 0px;
+    }
+
+    .regenerate-icon {
+        width: 3rem;
+        height: auto;
+    }
+
     /* Navigation */
     .navigation-ready-message {
-        bottom: 20px; /* Position above instructions */
-        font-size: 1rem;
-        width: 80%;
+        padding: 25px 15px;
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+        bottom: 30px;
+        font-size: 1.1rem;
+        width: 70%;
+        animation: none;
+    }
+    #nav-ready-desktop{
+        display: none;
+    }
+    #nav-ready-mobile{
+        display: block;
+    }
+    #nav-ready-mobile > p {
+        margin: 0;
+        padding: 0;
     }
 }
