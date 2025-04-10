@@ -318,11 +318,11 @@ async function runDisplaySequence() {
 
     // 1. Show Static Message 0
     showSection(0); // Show Message 0
-    await waitForMs(10000); // Display for
+    await waitForMs(6000); // Display for
 
     // 2. Show Case Image
     showSection(1); // Show case image
-    await waitForMs(12000); // Display for
+    await waitForMs(5000); // Display for
 
     // 3. Transition to Typing Container
     showSection(2); // Show typing container
