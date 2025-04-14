@@ -1,149 +1,41 @@
-# Missing Persons Visualization
+# Archivo Humano - Visualización de Casos de Personas Desaparecidas en Jalisco
 
-This project is a web-based visualization tool designed to highlight the stories of missing persons. It dynamically displays case details, allows users to navigate through sections, and provides options to share cases on social media. The tool is built using HTML, CSS, and JavaScript, and it processes data from a CSV file.
+## Descripción
 
----
+Este proyecto es una página web estática diseñada para visibilizar y crear conciencia sobre los casos de personas desaparecidas en Jalisco, México[cite: 1, 2, 3]. Utiliza datos reales anonimizados para presentar la historia y la ficha de desaparición de una persona de manera secuencial y sensible[cite: 1, 2]. El objetivo es recordar que detrás de cada número hay una historia humana y fomentar la difusión de estos casos[cite: 1, 2].
 
-## Features
+La información de los casos parece provenir del Registro Estatal de Personas Desaparecidas de Jalisco, basado en las URL de las fotografías encontradas en los datos[cite: 3].
 
-### 1. **Dynamic Case Display**
-- Displays a random case or a specific case based on the URL parameter (`?id=<case_id>`).
-- Includes details such as name, age, gender, location, and more.
+## Funcionalidad
 
-### 2. **Keyboard and Touch Navigation**
-- Navigate between sections using:
-  - **Keyboard:** Arrow keys (`←` and `→`).
-  - **Touch:** Swipe gestures on mobile devices.
+1.  **Carga de Caso**: Al cargar la página, se selecciona un caso de persona desaparecida, ya sea aleatoriamente o mediante un identificador (`id`) proporcionado en la URL (`?id=...`)[cite: 2].
+2.  **Visualización Secuencial**: La información del caso se presenta en secciones que aparecen una tras otra[cite: 2]:
+    * Mensaje inicial introduciendo la historia[cite: 1].
+    * Fotografía de la persona[cite: 1, 2].
+    * Narrativa/descripción anonimizada del caso, mostrada con un efecto de máquina de escribir[cite: 1, 2, 3].
+    * Ficha de desaparición con detalles como nombre, edad, características físicas, fecha y lugar de desaparición[cite: 1, 2, 3].
+    * Mensaje indicando los días que la persona lleva desaparecida[cite: 1, 2].
+    * Mensaje de concientización sobre la frecuencia de estos casos en Jalisco[cite: 1].
+    * Sección final con botones para compartir el caso en redes sociales y un botón para mostrar otro caso[cite: 1, 2].
+3.  **Navegación**: Una vez completada la secuencia inicial, se habilita la navegación entre las diferentes secciones mediante las teclas de flecha (izquierda/derecha) en escritorio o deslizando (izquierda/derecha) en dispositivos móviles[cite: 2, 4].
+4.  **Mostrar Otro Caso**: El botón de refrescar permite cargar y visualizar un nuevo caso aleatorio[cite: 2].
+5.  **Compartir**: Se proporcionan enlaces para compartir fácilmente la URL específica del caso visualizado en redes sociales (Facebook, Twitter, WhatsApp, Instagram)[cite: 1, 2].
 
-### 3. **Social Media Sharing**
-- Share cases directly on:
-  - Facebook
-  - Twitter
-  - WhatsApp
-  - Instagram
-- Each shared link includes the case's unique identifier for direct access.
+## Datos
 
-### 4. **Regenerate Case**
-- A "Regenerate" button allows users to load a new random case.
+El proyecto utiliza un archivo CSV (`data/processed_cases.csv`) que contiene la información detallada y anonimizada de los casos de personas desaparecidas[cite: 2, 3]. Este archivo incluye campos como ID, nombre, edad, sexo, descripción, fecha de desaparición, municipio, estado, estatus y la URL de la fotografía[cite: 3].
 
-### 5. **Smooth Transitions**
-- Sections fade in and out smoothly for a better user experience.
+## Tecnologías Utilizadas
 
----
+* **HTML**: Para la estructura de la página web[cite: 1].
+* **CSS**: Para el diseño visual, estilos, animaciones y responsividad[cite: 4].
+* **JavaScript**: Para la lógica de la aplicación, incluyendo la carga de datos del CSV, la selección de casos, la manipulación del DOM, las animaciones (máquina de escribir, secuencia de aparición), el cálculo de días desaparecidos, la generación de enlaces para compartir y la gestión de la navegación[cite: 2].
 
-## How It Works
+## Cómo Visualizar
 
-### 1. **Data Source**
-- The tool reads data from a CSV file (`data/processed_cases.csv`).
-- Each row in the CSV represents a missing person's case.
+Al ser un proyecto web estático, puede visualizarse localmente:
 
-### 2. **URL Parameters**
-- If a case ID is provided in the URL (`?id=<case_id>`), the corresponding case is displayed.
-- If no ID is provided, a random case is selected.
+1.  Asegúrate de tener todos los archivos y carpetas (`index.html`, `css/`, `js/`, `data/`, `static/`) en la misma ubicación.
+2.  Abre el archivo `index.html` en un navegador web moderno.
 
-### 3. **Navigation**
-- The tool uses a sequence of sections:
-  1. Static introductory message.
-  2. Case image.
-  3. Typing effect for the narrative.
-  4. Case details (card format).
-  5. Days missing message.
-  6. Static closing messages.
-  7. Social media sharing and regenerate button.
-
-### 4. **Social Media Links**
-- Links are dynamically generated based on the current case's ID.
-
----
-
-## Setup and Usage
-
-### 1. **Requirements**
-- A web browser.
-- A local or remote server to host the files.
-
-### 2. **Run Locally**
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd missing-persons-visualization
-   ```
-2. Start a local server:
-   ```bash
-
-   python3 -m http.server 8000 --bind 127.0.0.1
-   ```
-3. Access the tool in your browser:
-   ```
-   http://<your-local-ip>:8000
-   ```
-   Replace `<your-local-ip>` with your computer's local IP address.
-
-### 3. **File Structure**
-- `index.html`: Main HTML file.
-- `css/styles.css`: Styles for the tool.
-- `js/main.js`: JavaScript logic for dynamic behavior.
-- `data/processed_cases.csv`: Data source for the cases.
-- `static/icons/`: Icons for social media and regenerate button.
-
----
-
-## Customization
-
-### 1. **Enable/Disable Navigation from Start**
-- Control navigation availability using the `enableNavigationFromStart` variable in `js/main.js`:
-  ```javascript
-  const enableNavigationFromStart = true; // Set to true for testing, false for production
-  ```
-
-### 2. **Modify Data**
-- Update the `data/processed_cases.csv` file with new cases.
-- Ensure the file includes the required columns (e.g., `id_cedula_busqueda`, `nombre_completo`, `fecha_desaparicion`, etc.).
-
-### 3. **Change Icons**
-- Replace icons in the `static/icons/` folder to customize the appearance of social media buttons and the regenerate button.
-
----
-
-## Example
-
-### URL with Case ID
-- Access a specific case using:
-  ```
-  http://<your-local-ip>:8000/?id=<case_id>
-  ```
-
-### Random Case
-- Access a random case by visiting:
-  ```
-
-  http://<your-local-ip>:8000
-  ```
-
----
-
-## Troubleshooting
-
-### 1. **Data Not Loading**
-- Ensure the `data/processed_cases.csv` file exists and is accessible.
-- Check the browser console for errors.
-
-### 2. **Navigation Not Working**
-- Verify the `enableNavigationFromStart` variable is set correctly.
-- Ensure the `sections` array in `js/main.js` includes all sections.
-
-### 3. **Social Media Links Not Working**
-- Confirm the `shareFacebook`, `shareTwitter`, etc., elements exist in `index.html`.
-- Check the generated URLs in the browser console.
-
----
-
-## Contributing
-
-Feel free to submit issues or pull requests to improve the project.
-
----
-
-## License
-
-This project is licensed under the MIT License.
+*Nota: Debido a las políticas de seguridad del navegador (CORS), la carga del archivo CSV local (`Workspace('data/processed_cases.csv')`) podría no funcionar correctamente si simplemente abres el `index.html` directamente desde el sistema de archivos (`file:///...`). Para asegurar la funcionalidad completa, es recomendable servir los archivos a través de un servidor web local (por ejemplo, usando Python `http.server`, `live-server` de Node.js, etc.).*
