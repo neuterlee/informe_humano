@@ -1,4 +1,4 @@
-# Archivo Humano - Visualización de Casos de Personas Desaparecidas en Jalisco
+# Informe Humano - Visualización de Casos de Personas Desaparecidas en Jalisco
 
 ## Descripción
 
