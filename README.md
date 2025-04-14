@@ -2,16 +2,16 @@
 
 ## Descripción
 
-Este proyecto es una página web estática diseñada para visibilizar y crear conciencia sobre los casos de personas desaparecidas en Jalisco, México[cite: 1, 2, 3]. Utiliza datos reales anonimizados para presentar la historia y la ficha de desaparición de una persona de manera secuencial y sensible[cite: 1, 2]. El objetivo es recordar que detrás de cada número hay una historia humana y fomentar la difusión de estos casos[cite: 1, 2].
+Este proyecto es una página web estática diseñada para visibilizar y crear conciencia sobre los casos de personas desaparecidas en Jalisco, México. Utiliza datos reales anonimizados para presentar la historia y la ficha de desaparición de una persona de manera secuencial y sensible. El objetivo es recordar que detrás de cada número hay una historia humana y fomentar la difusión de estos casos.
 
-La información de los casos parece provenir del Registro Estatal de Personas Desaparecidas de Jalisco, basado en las URL de las fotografías encontradas en los datos[cite: 3].
+La información de los casos parece provenir del Registro Estatal de Personas Desaparecidas de Jalisco, basado en las URL de las fotografías encontradas en los datos.
 
 ## Funcionalidad
 
 1.  **Carga de Caso**: Al cargar la página, se selecciona un caso de persona desaparecida, ya sea aleatoriamente o mediante un identificador (`id`) proporcionado en la URL (`?id=...`)[cite: 2].
 2.  **Visualización Secuencial**: La información del caso se presenta en secciones que aparecen una tras otra[cite: 2]:
-    * Mensaje inicial introduciendo la historia[cite: 1].
-    * Fotografía de la persona[cite: 1, 2].
+    * Mensaje inicial introduciendo la historia.
+    * Fotografía de la persona.
     * Narrativa/descripción anonimizada del caso, mostrada con un efecto de máquina de escribir[cite: 1, 2, 3].
     * Ficha de desaparición con detalles como nombre, edad, características físicas, fecha y lugar de desaparición[cite: 1, 2, 3].
     * Mensaje indicando los días que la persona lleva desaparecida[cite: 1, 2].
